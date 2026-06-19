@@ -18,3 +18,4 @@ class Libro:
     def mostrar_info(self):
         disponible = "Disponible" if self.disponible else "No disponible"
         return f"ID:  {self.id}, Ttiulo: {self.titulo}, Autor: {self.autor.nombre}, ISBN: {self.isbn}, Estado: {disponible}"
+    

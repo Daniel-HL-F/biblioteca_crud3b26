@@ -13,7 +13,7 @@ class LibroDAO:
         registros = cursor.fetchall()
 
         libros = []
-        for registro in registro :
+        for registro in registros:
             libro = Libro(
                 id = registro[0],
                 titulo = registro[1],
@@ -22,26 +22,27 @@ class LibroDAO:
                 disponible = registro[4]
             )
             libros.append(libro)
-            cursor.close()
-            conexion.close()
-            return libros
+        cursor.close()
+        conexion.close()
+        return libros
         
 #INSERT
 
-        def insertar(self, libro):
+    def insertar(self, libro):
              conexion = Conexion.obtener_conexion()
              cursor = conexion.cursor()
 
              sql = """
-            INSERT INTO libro(titulo, autor, isbn, disponible)
-            VALUES(%s, %s, %s, %s)
+            INSERT INTO libro(id, titulo, autor, isbn, disponible)
+            VALUES(%s, %s, %s, %s, %s)
             """
              
              cursor.execute(sql, (
-                 libro.titulo,
-                 libro.autor,
-                 libro.isbn,
-                 libro.disponible
+                libro.id,
+                libro.titulo,
+                libro.autor,
+                libro.isbn,
+                libro.disponible
              ))
 
              conexion.commit()
@@ -81,8 +82,21 @@ class LibroDAO:
                  conexion.commit()
                  cursor.close()
                  conexion.close()
+
+    def obtener_ultimo_id(self):
+         conexion = Conexion.obtener_conexion()
+         cursor = conexion.cursor()
+
+         cursor.execute("SELECT MAX(id) FROM libro")
+         resultado = cursor.fetchone()
+
+         cursor.close()
+         conexion.close()
+
+         if resultado[0] is None:
+              return 0
+         return resultado[0]
+    
+                      
                 
-
-
-
 
