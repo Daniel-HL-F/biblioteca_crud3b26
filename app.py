@@ -41,7 +41,7 @@ def actualizar_libro():
     try:
         libro_dao = LibroDAO()
         print("Lista de libros disponibles")
-        libro_dao.optener_todo()
+        ver_libros()
         id = int(input("Seleccione el id del libro a actualizar"))
         titulo = input("Escribe el titulo: ")
         autor = int("Escribe el id autor: ")
@@ -58,9 +58,10 @@ def eliminar_libro():
     try:
         libro_dao = LibroDAO()
         print("Lista de libros diaponibles")
-        libro_dao.obtener_todo()
+        ver_libros()
         id = int(input("Escribe el id del libro a eliminar: "))
         libro_dao.eliminar(id)
+        print(f"El libro {id} ha sido eliminado")
     except Exception as e:
         print("Error al eliminar el libro")
         print(e)

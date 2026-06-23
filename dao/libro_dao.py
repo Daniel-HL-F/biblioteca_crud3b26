@@ -9,7 +9,19 @@ class LibroDAO:
         conexion = Conexion.obtener_conexion()
         cursor = conexion.cursor()
 
-        cursor.execute("SELECT * FROM libro")
+        sql = """
+            SELECT 
+                l.id,
+                l.titulo,
+                a.nombre AS autor,
+                l.isbn,
+                l,disponible
+            FROM libro l
+            INNER JOIN autor a
+            ON l.autor = a.id;
+        """
+
+        cursor.execute(sql)
         registros = cursor.fetchall()
 
         libros = []
@@ -72,16 +84,16 @@ class LibroDAO:
                  cursor.close()
                  conexion.close()
 
-            #DELETE
-                 def eliminar(self,id):
-                     conexion = Conexion.obtener_conexion()
-                 cursor = conexion.cursor()
+    #DELETE
+    def eliminar(self,id):
+        conexion = Conexion.obtener_conexion()
+        cursor = conexion.cursor()
 
-                 cursor.execute("DELETE FROM libro WHERE id = %s", (id))
+        cursor.execute("DELETE FROM libro WHERE id = %s",(id,))
 
-                 conexion.commit()
-                 cursor.close()
-                 conexion.close()
+        conexion.commit()
+        cursor.close()
+        conexion.close()
 
     def obtener_ultimo_id(self):
          conexion = Conexion.obtener_conexion()
