@@ -1,10 +1,10 @@
 import flet as ft
 
-from ui.main_window import main_Window
+from ui.main_window import main_window
 from dao.libro_dao import LibroDAO
 from models.libro import Libro
 from dao.usuario_dao import UsuarioDAO
-from models.usuario import Usuario
+from models.libro import Libro
 
 def ver_libros():
     try:
@@ -109,7 +109,7 @@ def menu_usuarios():
         case 4:
             eliminar_usuario()
 #===============================================================================
-ft.app(target=main_Window)
+ft.app(target=main_window)
 
 
 
